@@ -106,16 +106,28 @@ def monte_carlo_integration(f, a, b, n):
     
     Returns:
         Наближене значення інтеграла
+    
+    Note:
+        Метод Монте-Карло має похибку O(1/√n), тому потребує
+        більшої кількості точок для досягнення точності детермінованих методів.
     """
     x_random = np.random.uniform(a, b, n)
     y_values = f(x_random)
     return (b - a) * np.mean(y_values)
 
 
-def compare_methods(f, a, b, exact_value, n_values):
+def compare_methods(f, a, b, exact_value, n_values, mc_multiplier=10):
     """
     Порівняння точності різних методів
     Compare accuracy of different methods
+    
+    Args:
+        f: функція для інтегрування
+        a: нижня межа
+        b: верхня межа
+        exact_value: точне значення інтеграла
+        n_values: список значень n для порівняння
+        mc_multiplier: множник для кількості точок Монте-Карло (за замовчуванням 10)
     """
     results = {
         'Прямокутники (середні)': [],
@@ -136,7 +148,7 @@ def compare_methods(f, a, b, exact_value, n_values):
         rect = rectangle_method(f, a, b, n, 'middle')
         trap = trapezoidal_method(f, a, b, n)
         simp = simpson_method(f, a, b, n)
-        mc = monte_carlo_integration(f, a, b, n * 10)
+        mc = monte_carlo_integration(f, a, b, n * mc_multiplier)
         
         # Збереження результатів
         results['Прямокутники (середні)'].append(rect)

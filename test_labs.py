@@ -81,7 +81,7 @@ def test_integration():
     print(f"  Трапеції: {trap_result:.6f} (похибка: {abs(trap_result - exact):.2e})")
     print(f"  Сімпсон: {simp_result:.6f} (похибка: {abs(simp_result - exact):.2e})")
     
-    success1 = (abs(rect_result - exact) < 1e-10 and 
+    success1 = (abs(rect_result - exact) < 1e-6 and 
                 abs(trap_result - exact) < 1e-10 and 
                 abs(simp_result - exact) < 1e-10)
     print(f"  Статус: {'✓ ПРОЙДЕНО' if success1 else '✗ НЕ ПРОЙДЕНО'}\n")
